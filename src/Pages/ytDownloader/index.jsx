@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.css";
-import cors from "cors";
 import Swal from "sweetalert2";
 import axios from "axios";
 import "./YT.scss";
-import ResultPage from "../result";
 class YtDownloader extends Component {
   constructor(props) {
     super(props);
@@ -47,17 +45,15 @@ class YtDownloader extends Component {
       });
     }
     if (type == "yt-mp3") {
-      url = url.slice(17);
+      // https://youtu.be/Srz1kVmy9n4
       axios
-        .get(`https://rizkydev-api.herokuapp.com/yt-mp3?url=${url}`, {
-          headers: {
-            "X-Requested-With": "XMLHttpRequest",
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-          },
-        })
+        .get(
+          `http://cors-anywhere.herokuapp.com/https://rizkydev-api.herokuapp.com/yt-mp3?url=${url}`
+        )
         .then((res) => {
           this.setState({
-            music: res.data,
+            isLoading: false,
+            music: res,
           });
         });
     } else if (type == "yt-mp4") {
@@ -75,55 +71,66 @@ class YtDownloader extends Component {
   };
 
   render() {
-    const { music } = this.state;
+    const { music, isLoading } = this.state;
     console.log(music);
     return (
       <Fragment>
         <div className="container">
-          <div className="card">
-            <div className="card-body">
-              <h4 className="text-center">
-                <i className="fa fa-youtube"></i> YouTube Downloader
-              </h4>
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="url"
-                  id="url"
-                  onKeyUp={this.handleUrl}
-                  placeholder="https://youtu.be/Srz1kVmy9n4"
-                  className="form-control"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <select
-                  className="form-control mb-3"
-                  id="type"
-                  name="type"
-                  onChange={this.handleType}
-                >
-                  <option value="">Convert to</option>
-                  <option value="yt-mp3" id="yt-mp3">
-                    .mp3
-                  </option>
-                  <option value="yt-mp4" id="yt-mp4">
-                    .mp4
-                  </option>
-                </select>
-              </div>
-              <div className="form-group">
-                <button
-                  type="submit"
-                  name="submit"
-                  className="btn btn-info btn-block"
-                  onClick={this.getData}
-                >
-                  <i className="fa fa-download"></i> Download
-                </button>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="text-center">
+                    <i className="fa fa-youtube"></i> YouTube Downloader
+                  </h4>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      name="url"
+                      id="url"
+                      onKeyUp={this.handleUrl}
+                      placeholder="https://youtu.be/Srz1kVmy9n4"
+                      className="form-control"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <select
+                      className="form-control mb-3"
+                      id="type"
+                      name="type"
+                      onChange={this.handleType}
+                    >
+                      <option value="">Convert to</option>
+                      <option value="yt-mp3" id="yt-mp3">
+                        .mp3
+                      </option>
+                      <option value="yt-mp4" id="yt-mp4">
+                        .mp4
+                      </option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <button
+                      type="submit"
+                      name="submit"
+                      className="btn btn-info btn-block"
+                      onClick={this.getData}
+                    >
+                      <i className="fa fa-download"></i> Download
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          {music.status == 200 ? (
+            <div className="row">
+              <div className="col-md-12">
+                <h2>Success</h2>
+              </div>
+            </div>
+          ) : null}
         </div>
       </Fragment>
     );
