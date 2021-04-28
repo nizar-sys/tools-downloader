@@ -1,5 +1,7 @@
 .jumbotron {
   width: 100%;
+  background-color: rgb(30, 207, 104);
+  margin-top: 7rem;
   .jumbotron-img {
     img {
       width: 300px;
@@ -8,5 +10,10 @@
   .title-jumbotron {
     padding: 20px 40px;
     text-align: center;
+  }
+}
+@media screen and (max-width: 600px) {
+  .uwuJumbotron{
+    margin-top: 10rem;
   }
 }

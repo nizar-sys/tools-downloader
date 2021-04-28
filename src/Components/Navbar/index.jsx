@@ -1,82 +1,54 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap";
 import "font-awesome/css/font-awesome.min.css";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
 
 class Navbar extends Component {
-  componentDidMount() {
-    (function () {
-      if (document.querySelector("#top-nav-toggle")) {
-        var navToggle = document.querySelector("#top-nav-toggle");
-
-        function watchNavClose(e) {
-          var topNav = document.querySelector(".top-bar");
-          if (!e.path.includes(topNav)) {
-            openCloseNav();
-            document.documentElement.removeEventListener(
-              "click",
-              watchNavClose
-            );
-          }
-        }
-
-        function openCloseNav() {
-          var navToggle = document.querySelector("#top-nav-toggle");
-
-          if (!navToggle.classList.contains("closed")) {
-            navToggle.classList.add("closed");
-            document
-              .querySelector("#top-bar__nav")
-              .classList.remove("collapsed");
-            document
-              .querySelector("html")
-              .addEventListener("click", watchNavClose);
-          } else {
-            navToggle.classList.remove("closed");
-            document.querySelector("#top-bar__nav").classList.add("collapsed");
-            document.documentElement.removeEventListener(
-              "click",
-              watchNavClose
-            );
-          }
-        }
-
-        navToggle.addEventListener("click", openCloseNav);
-      }
-    })();
-  }
   render() {
     return (
       <Fragment>
-        <div className="top-bar">
-          <button className="top-bar__nav-toggle hamburger" id="top-nav-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <a href="/" className="top-bar__brand">
-            Downloader
-          </a>
-          <div className="top-bar__social mx-auto">
-            <a href="https://github.com/nizar-sys" target="_blank">
-              <i className="fa fa-github" aria-hidden="true"></i>
-            </a>
-            <a href="https://twitter.com/jokiicode" target="_blank">
-              <i className="fa fa-twitter" aria-hidden="true"></i>
-            </a>
+        <nav
+          className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+          id="mainNav"
+        >
+          <div className="container">
+            <Link className="navbar-brand js-scroll-trigger" to="/">
+              <i style={{ color: "white" }}>Downloader -</i>
+            </Link>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarResponsive"
+              aria-controls="navbarResponsive"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarResponsive">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link className="nav-link js-scroll-trigger" to="/">
+                    <i className="fa fa-home"></i> Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link js-scroll-trigger" to="/yt">
+                    <i className="fa fa-youtube"></i> YouTube Downloader
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link js-scroll-trigger" to="#contact">
+                    <i className="fa fa-play"></i> TikTok Downloader
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <nav className="top-bar__nav collapsed" id="top-bar__nav">
-            <ul className="top-bar__nav-list ">
-              <li>
-                <Link to="#"><i className="fa fa-youtube"></i> YouTube Downloader</Link>
-              </li>
-              <li>
-                <Link to="#"><i className="fa fa-play-circle"></i> TikTok Downloader</Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        </nav>
       </Fragment>
     );
   }

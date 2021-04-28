@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class Footer extends Component {
   render() {
     return (
-      <footer className="footer fixed-bottom d-flex">
+      <footer className="footer fixed-bottom bg-dark d-flex">
         <div className="footer-brand">
           <h4>Downloader</h4>
         </div>
