@@ -1,0 +1,16 @@
+.footer{
+    height: 50px;
+    background-color: black;
+    .footer-brand{
+        padding: 17px;
+        color: white;
+        h4{
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+    }
+    .text-footer{
+        margin: 0 auto;
+        color: white;
+    }
+}
