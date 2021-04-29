@@ -4,12 +4,13 @@ import "font-awesome/css/font-awesome.css";
 import Swal from "sweetalert2";
 import axios from "axios";
 import "./YT.scss";
+import ResultPage from "../result";
 class YtDownloader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
       url: "",
+      isLoading: false,
       type: "",
       music: [],
       video: [],
@@ -20,6 +21,7 @@ class YtDownloader extends Component {
     let url = e.target.value;
     this.setState({
       url: url,
+      isLoading: false,
     });
   };
 
@@ -27,13 +29,12 @@ class YtDownloader extends Component {
     let type = e.target.value;
     this.setState({
       type: type,
+      isLoading: false,
     });
   };
 
   getData = () => {
     let { url, type } = this.state;
-    console.log(url);
-    console.log(type);
     if (url == "") {
       Swal.fire({
         position: "top-end",
@@ -45,19 +46,35 @@ class YtDownloader extends Component {
       });
     }
     if (type == "yt-mp3") {
+      this.setState({
+        isLoading: true,
+      });
       // https://youtu.be/Srz1kVmy9n4
       axios
         .get(
-          `http://cors-anywhere.herokuapp.com/https://rizkydev-api.herokuapp.com/yt-mp3?url=${url}`
+          `https://cors-anywhere.herokuapp.com/https://rizkydev-api.herokuapp.com/yt-mp3?url=${url}`
         )
         .then((res) => {
           this.setState({
-            isLoading: false,
             music: res,
+            isLoading: false,
           });
         });
     } else if (type == "yt-mp4") {
-      alert("convert mp4");
+      this.setState({
+        isLoading: true,
+      });
+      // https://youtu.be/Srz1kVmy9n4
+      axios
+        .get(
+          `https://cors-anywhere.herokuapp.com/https://rizkydev-api.herokuapp.com/yt-mp4?url=${url}`
+        )
+        .then((res) => {
+          this.setState({
+            music: res,
+            isLoading: false,
+          });
+        });
     } else {
       Swal.fire({
         position: "top-end",
@@ -111,26 +128,34 @@ class YtDownloader extends Component {
                     </select>
                   </div>
                   <div className="form-group">
-                    <button
-                      type="submit"
-                      name="submit"
-                      className="btn btn-info btn-block"
-                      onClick={this.getData}
-                    >
-                      <i className="fa fa-download"></i> Download
-                    </button>
+                    {isLoading === false ? (
+                      <button
+                        type="submit"
+                        name="submit"
+                        className="btn btn-info btn-block"
+                        onClick={this.getData}
+                      >
+                        <i className="fa fa-download"></i> Download
+                      </button>
+                    ) : (
+                      <button
+                        type="submit"
+                        name="submit"
+                        disabled
+                        className="btn btn-info btn-block"
+                        onClick={this.getData}
+                      >
+                        <i className="fa fa-download"></i> Loading
+                      </button>
+                    )}
                   </div>
+                  {music.status == 200 ? (
+                    <ResultPage music={music.data} />
+                  ) : null}
                 </div>
               </div>
             </div>
           </div>
-          {music.status == 200 ? (
-            <div className="row">
-              <div className="col-md-12">
-                <h2>Success</h2>
-              </div>
-            </div>
-          ) : null}
         </div>
       </Fragment>
     );

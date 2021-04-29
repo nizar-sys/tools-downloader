@@ -10,7 +10,7 @@ class Navbar extends Component {
     return (
       <Fragment>
         <nav
-          className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+          className="navbar navbar-expand-lg navbar-dark bg-dark"
           id="mainNav"
         >
           <div className="container">
@@ -41,7 +41,7 @@ class Navbar extends Component {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link js-scroll-trigger" to="#contact">
+                  <Link className="nav-link js-scroll-trigger" to="/tt">
                     <i className="fa fa-play"></i> TikTok Downloader
                   </Link>
                 </li>

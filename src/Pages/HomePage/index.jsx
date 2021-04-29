@@ -7,8 +7,8 @@ import logo from "../../img/logo.jpg";
 class HomePage extends Component {
   render() {
     return (
-      <div className="container mt-4">
-        <div className="row mt-1">
+      <div className="container mt-3">
+        <div className="row">
           <div className="col-md-12">
             {/* Jumbotron */}
             <div class="jumbotron jumbotron-fluid uwuJumbotron">
