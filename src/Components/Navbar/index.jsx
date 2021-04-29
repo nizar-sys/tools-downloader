@@ -41,8 +41,13 @@ class Navbar extends Component {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link js-scroll-trigger" to="/tt">
-                    <i className="fa fa-play"></i> TikTok Downloader
+                  <Link
+                    to="/request"
+                    className="nav-link js-scroll-trigger"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                  >
+                    <i className="fa fa-sticky-note"></i> Request Tools
                   </Link>
                 </li>
               </ul>

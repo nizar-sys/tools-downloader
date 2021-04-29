@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "bootstrap": "4.6.0",
     "cors": "^2.8.5",
+    "emailjs-com": "^2.6.4",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "node-sass": "^5.0.0",

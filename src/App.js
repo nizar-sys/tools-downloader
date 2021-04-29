@@ -4,7 +4,7 @@ import HomePage from './Pages/HomePage';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import YtDownloader from './Pages/ytDownloader';
-import ttDownloader from './Pages/ttDownloader';
+import RequestTools from './Pages/requestTools';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Switch>
         <Route path='/' exact component={HomePage}/>
         <Route path='/yt' component={YtDownloader}/>
-        <Route path='/tt' component={ttDownloader}/>
+        <Route path='/request' component={RequestTools}/>
       </Switch>
       <Footer/>
     </Router>
